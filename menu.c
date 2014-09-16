@@ -1,12 +1,12 @@
 /**************************************************************************************************/
-/* Copyright (C) xeeyung@163.com, sse@USTC, 2014-2015                                             */
+/* Copyright (C) 1434005644@qq.com, sse@USTC, 2014-2015                                           */
 /*                                                                                                */
 /*  FILE NAME             :  menu.c                                                               */
-/*  PRINCIPAL AUTHOR      :  Xuyang                                                               */
+/*  PRINCIPAL AUTHOR      :  xinguosheng                                                          */
 /*  SUBSYSTEM NAME        :  menu                                                                 */
 /*  MODULE NAME           :  menu                                                                 */
 /*  LANGUAGE              :  C                                                                    */
-/*  TARGET ENVIRONMENT    :  VC6.0                                                                */
+/*  TARGET ENVIRONMENT    :  DEV-C++                                                              */
 /*  DATE OF FIRST RELEASE :  2014/09/15                                                           */
 /*  DESCRIPTION           :  This is a menu program                                               */
 /**************************************************************************************************/
@@ -14,7 +14,7 @@
 /*
  * Revision log:
  *
- * Created by Xuyang, 2014/09/15
+ * Created by xinguosheng, 2014/09/15
  *
  */
 
@@ -24,7 +24,7 @@
 #include <string.h>
 
 #define DESC_LEN    1024
-#define CMD_LEN     100
+#define CMD_LEN     128
 
 typedef struct DataNode
 {
@@ -33,17 +33,48 @@ typedef struct DataNode
     struct  DataNode *next;
 } DataNode;
 
+/*this is definition of putMenuList*/
+void putMenuList(DataNode *x)
+{
+    while(x != NULL)
+    {
+        printf("%s - %s\n", x->cmd, x->desc);
+        x = x->next;
+    } 
+}
+
+/*this is definition of putListOne*/
+void putListOne(DataNode *y , DataNode *z)
+{
+    while(1)
+    {
+        char cmd[CMD_LEN];
+        printf("Input a cmd > ");
+        scanf("%s", cmd);
+        y = z;
+        while(y != NULL)
+        {
+            if(!strcmp(y->cmd , cmd))
+            {
+                printf("%s - %s\n", y->cmd, y->desc);
+                break;
+            }
+            y = y->next;
+        }
+        if(y == NULL)
+        {
+            printf("This is a wrong cmd !\n ");
+        }
+    }
+}
+
 void main()
 {   
-    /*this is declaration of putMenuList*/
-    void putMenuList(DataNode *a);
-    /*this is declaration of putListOne*/
-    void putListOne(DataNode *b , DataNode *c);
     static DataNode head[] =
     {
         {"help","this is help cmd.",&head[1]},
-        {"search","this is search cmd.",&head[2]},
-        {"copy","this is copy cmd.",&head[3]},
+        {"xml","this is xml cmd.",&head[2]},
+        {"html","this is html cmd.",&head[3]},
         {"version","menu progrram v2.0",NULL}
     };
     DataNode * p = head;
@@ -52,38 +83,7 @@ void main()
     putListOne(p , head);   
 }
 
-/*this is definition of putMenuList*/
-void putMenuList(DataNode *a)
-{
-    while(a != NULL)
-    {
-        printf("%s - %s\n", a->cmd, a->desc);
-        a = a->next;
-    } 
-}
 
-/*this is definition of putListOne*/
-void putListOne(DataNode *b , DataNode *c)
-{
-    while(1)
-    {
-        char cmd[CMD_LEN];
-        printf("Input a cmd > ");
-        scanf("%s", cmd);
-        b = c;
-        while(b != NULL)
-        {
-            if(!strcmp(b->cmd , cmd))
-            {
-                printf("%s - %s\n", b->cmd, b->desc);
-                break;
-		    }
-            b = b->next;
-        }
-        if(b == NULL)
-        {
-            printf("This is a wrong cmd !\n ");
-        }
-    }
-}
+
+
 
