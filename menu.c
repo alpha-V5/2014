@@ -28,24 +28,24 @@
 
 typedef struct DataNode
 {
-  char*   cmd;
-  char*   desc;
-  struct  DataNode *next;
+    char*   cmd;
+    char*   desc;
+    struct  DataNode *next;
 } DataNode;
 
 void main()
 {   
-  /*this is declaration of putMenuList*/
-  void putMenuList(DataNode *a);
-  /*this is declaration of putListOne*/
-  void putListOne(DataNode *b , DataNode *c);
-  static DataNode head[] =
-  {
-    {"help","this is help cmd.",&head[1]},
-    {"search","this is search cmd.",&head[2]},
-    {"copy","this is copy cmd.",&head[3]},
-    {"version","menu progrram v2.0",NULL}
-  };
+    /*this is declaration of putMenuList*/
+    void putMenuList(DataNode *a);
+    /*this is declaration of putListOne*/
+    void putListOne(DataNode *b , DataNode *c);
+    static DataNode head[] =
+    {
+        {"help","this is help cmd.",&head[1]},
+        {"search","this is search cmd.",&head[2]},
+        {"copy","this is copy cmd.",&head[3]},
+        {"version","menu progrram v2.0",NULL}
+    };
     DataNode * p = head;
     printf("menu list : \n");
     putMenuList(p);
@@ -73,16 +73,16 @@ void putListOne(DataNode *b , DataNode *c)
         b = c;
         while(b != NULL)
         {
-           if(!strcmp(b->cmd , cmd))
-           {
-               printf("%s - %s\n", b->cmd, b->desc);
-               break;
-		   }
-           b = b->next;
+            if(!strcmp(b->cmd , cmd))
+            {
+                printf("%s - %s\n", b->cmd, b->desc);
+                break;
+		    }
+            b = b->next;
         }
         if(b == NULL)
         {
-           printf("This is a wrong cmd !\n ");
+            printf("This is a wrong cmd !\n ");
         }
     }
 }
